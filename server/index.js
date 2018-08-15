@@ -1,12 +1,24 @@
 let express = require("express");
-let comments = require("./comments");
-let products = require("./products");
-let vehicles = require("./vehicles");
-let contacts = require("./contacts");
-const app = express();
 let bodyParser = require("body-parser");
-   
+
+const app = express();
 app.use(bodyParser.json());
+
+
+let ContactRoutes  = require("./routes/ContactRoutes");
+app.use(ContactRoutes);
+
+let CommentRoutes  = require("./routes/CommentRoutes");
+app.use(CommentRoutes);
+
+let VehicleRoutes  = require("./routes/VehicleRoutes");
+app.use(VehicleRoutes);
+
+let ProductRoutes  = require("./routes/ProductRoutes");
+app.use(ProductRoutes);
+
+
+
 
 
 
@@ -88,10 +100,10 @@ app.use(bodyParser.json());
 
 
 
-        app.get("/contacts",function(req,res,next)
-        {
-        return res.json(contacts);
-        });
+        // app.get("/contacts",function(req,res,next)
+        // {
+        // return res.json(contacts);
+        // });
 
         app.get("/contact/:_id",function(req,res,next) {
             const contactID = contacts.find(contact=>contact._id == req.params._id)

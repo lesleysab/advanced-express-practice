@@ -4,9 +4,9 @@ let {list,show,create,update,remove} = require( "../controllers/ProductControlle
 
 
 router.get("/products", list);
-router.get("/products/:id", show);
+router.get("/product/:_id", show);
 router.post("/products", create);
-router.put("/products/:id", update);
-router.delete("/products/:id", remove);
+router.put("/products/:_id", update);
+router.delete("/products/:_id", remove);
 
 module.exports =  router;

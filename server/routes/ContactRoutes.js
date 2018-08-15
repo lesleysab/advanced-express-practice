@@ -4,9 +4,9 @@ let {list,show,create,update,remove} = require( "../controllers/ContactControlle
 
 
 router.get("/contacts", list);
-router.get("/contacts/:id", show);
+router.get("/contact/:_id", show);
 router.post("/contacts", create);
-router.put("/contacts/:id", update);
-router.delete("/contacts/:id", remove);
+router.put("/contacts/:_id", update);
+router.delete("/contacts/:_id", remove);
 
 module.exports =  router;
