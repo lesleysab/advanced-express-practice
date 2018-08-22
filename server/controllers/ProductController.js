@@ -1,30 +1,38 @@
-let products = require("../products");
+// const mongoose = require("mongoose");
+// let products = require("../products");
+const ProductModel = require("../models/ProductModel");
 
-module.exports.list =  function list(req, res) {
-    return res.json(products);
-}
-   module.exports.show =  function show(req, res) {
-    const productID = products.find(product=> product._id==req.params._id)   
-    return res.json(productID);
-}
-   let productID = 11;
-   module.exports.create =  function create(req, res) {
-        let newProduct = req.body;
-        req.body._id  = productID;  
-        productID ++        
-        products.push(newProduct);
-        return res.json(newProduct);
-   
-}
- 
-   module.exports.update =  function update(req, res) {
-    return res.json({theId: req.params.id});
-   }
+module.exports.list = function list(req, res) {
+  ProductModel.find({})
+    .exec()
+    .then(products => {
+      return res.json(products);
+    });
+};
 
-   
-   module.exports.remove =  function remove(req, res) {
-    return res.json({});
-   }
+module.exports.show = function show(req, res) {
+  ProductModel.findById(req.params._id)
+    .exec()
+    .then(product => {
+      return res.json(product);
+    });
+};
 
- 
-   
+module.exports.create = function create(req, res) {
+  const newProduct = new ProductModel({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price
+  });
+  newProduct.save().then(savedProduct => {
+    return res.json(savedProduct);
+  });
+};
+
+//    module.exports.update =  function update(req, res) {
+//     return res.json({theId: req.params.id});
+//    }
+
+//    module.exports.remove =  function remove(req, res) {
+//     return res.json({});
+//    }

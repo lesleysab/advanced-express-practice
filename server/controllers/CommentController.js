@@ -1,32 +1,36 @@
-let comments = require("../comments");
+// const mongoose = require("mongoose");
+// let comments = require("../comments");
+const CommentModel = require("../models/CommentModel");
 
-module.exports.list =  function list(req, res) {
-    return res.json(comments);
-   }
+module.exports.list = function list(req, res) {
+  CommentModel.find({})
+    .exec()
+    .then(comments => {
+      return res.json(comments);
+    });
+};
 
- 
-module.exports.show =  function show(req, res) {
-    const commentID = comments.find(comment => comment._id==req.params._id)
-    return res.json(commentID);
-}
+module.exports.show = function show(req, res) {
+  CommentModel.findById(req.params._id)
+    .exec()
+    .then(comment => {
+      return res.json(comment);
+    });
+};
 
-   let commentID = 5;
-   module.exports.create =  function create(req, res) {
-            let newComment = req.body;
-            req.body._id  = commentID;  
-            commentID ++        
-            comments.push(newComment);
-            return res.json(newComment);
-   
-}
-   
-   module.exports.update =  function update(req, res) {
-    return res.json({theId: req.params.id});
-   }
+module.exports.create = function create(req, res) {
+  const newComment = new CommentModel({
+    body: req.body.body
+  });
+  newComment.save().then(savedComment => {
+    return res.json(savedComment);
+  });
+};
 
-   
-   module.exports.remove =  function remove(req, res) {
-    return res.json({});
-   }
+//    module.exports.update =  function update(req, res) {
+//     return res.json({theId: req.params.id});
+//    }
 
- 
+//    module.exports.remove =  function remove(req, res) {
+//     return res.json({});
+//    }
