@@ -50,7 +50,7 @@ Once completed, the web page should be able to list out the information, create 
 # Part 4 - Database
 * In server/index.js, import and use mongoose. Connect to a database "advanced-express-practice" 
 * Create the mongoose models for Contact, Vehicle, Comment Product
-* CommentModel - body
+* CommentModel - body2
 * ContactModel - name, occupation, avatar
 * VehicleModel - year, make, model
 * ProductModel - name, description
